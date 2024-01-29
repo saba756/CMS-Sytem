@@ -12,7 +12,9 @@ using System.Text;
 
 namespace CMS.Controllers
 {
-    public class LoginController : Controller
+    [Route("api/")]
+    [ApiController]
+    public class LoginController : ControllerBase
     {
         private IConfiguration _config;
         private readonly UserManager<AppUser> _userManager;
