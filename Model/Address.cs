@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CMS.Model.Identity
+namespace CMS.Model
 {
     public class Address
     {

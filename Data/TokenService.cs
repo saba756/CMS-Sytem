@@ -1,4 +1,4 @@
-﻿using CMS.Model.Identity;
+﻿using CMS.Model;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

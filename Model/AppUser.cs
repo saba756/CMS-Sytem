@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.Net;
 
-namespace CMS.Model.Identity
+namespace CMS.Model
 {
     public class AppUser : IdentityUser
     //then this drive from identity user,
@@ -13,5 +13,5 @@ namespace CMS.Model.Identity
         public Address Address { get; set; }
 
     }
-    
+
 }

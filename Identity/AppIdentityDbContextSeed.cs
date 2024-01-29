@@ -1,7 +1,7 @@
-﻿using CMS.Model.Identity;
+﻿using CMS.Model;
 using Microsoft.AspNetCore.Identity;
 
-namespace CMS.Data.Identity
+namespace CMS.Identity
 {
     public class AppIdentityDbContextSeed
     {

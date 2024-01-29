@@ -1,7 +1,8 @@
-﻿using CMS.Model.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using CMS.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-namespace CMS.Data.Identity
+using Microsoft.EntityFrameworkCore;
+
+namespace CMS.Identity
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     //similar to the DbContext this give us the ability to query 
@@ -20,7 +21,6 @@ namespace CMS.Data.Identity
             // For example, you can rename the ASP.NET Core Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-
     }
-
+    
 }

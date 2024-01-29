@@ -1,4 +1,4 @@
-﻿using CMS.Model.Identity;
+﻿using CMS.Model;
 
 namespace CMS.Data
 {
