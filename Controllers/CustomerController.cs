@@ -2,6 +2,7 @@
 using CMS.Data;
 using CMS.Dto;
 using CMS.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -21,7 +22,8 @@ namespace CMS.Controllers
             _mapper = mapper;
             
         }
-        //GET api/commands
+        //GET api
+        [Authorize]
         [HttpGet]
         public  ActionResult<IEnumerable<CustomerDto>> GetAllCustomers()
         {
@@ -29,6 +31,7 @@ namespace CMS.Controllers
            return Ok(_mapper.Map<IEnumerable<Customer>>(CustomerDto));
         }
         //GET api/commands/{id}
+        [Authorize]
         [HttpGet("{id}", Name = "GetCustomerById")]
         public ActionResult<CustomerDto> GetGustomerById(int id)
         {
@@ -42,6 +45,7 @@ namespace CMS.Controllers
 
 
         //POST api/commands
+        [Authorize]
         [HttpPost]
         public ActionResult<CustomerDto> CreateCustomer(CustomerDto customerDto)
         {
@@ -55,6 +59,7 @@ namespace CMS.Controllers
 
 
         //PUT api/commands/{id}
+        [Authorize]
         [HttpPut("{id}")]
         public ActionResult UpdateCustomer(int id, CustomerDto customerDto)
         {
@@ -103,6 +108,7 @@ namespace CMS.Controllers
         }
 
         //DELETE api/customer/{id}
+        [Authorize]
         [HttpDelete("{id}")]
         public ActionResult DeleteCustomer(int id)
         {
