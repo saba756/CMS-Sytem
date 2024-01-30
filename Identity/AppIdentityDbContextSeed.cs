@@ -11,9 +11,9 @@ namespace CMS.Identity
             {
                 var user = new AppUser
                 {
-                    DisplayName = "Bob",
-                    Email = "bob@test.com",
-                    UserName = "bob@test.com",
+                    DisplayName = "Saba",
+                    Email = "saba@test.com",
+                    UserName = "saba@test.com",
                     Address = new Address
                     {
                         FirstName = "Bob",

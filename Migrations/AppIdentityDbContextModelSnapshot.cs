@@ -4,19 +4,16 @@ using CMS.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CMS.Migrations.AppIdentityDb
+namespace CMS.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20240129060426_appuser")]
-    partial class appuser
+    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,11 +24,11 @@ namespace CMS.Migrations.AppIdentityDb
 
             modelBuilder.Entity("CMS.Model.Address", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("address_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("address_id"));
 
                     b.Property<string>("AppUserId")
                         .IsRequired()
@@ -61,7 +58,7 @@ namespace CMS.Migrations.AppIdentityDb
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("address_id");
 
                     b.HasIndex("AppUserId")
                         .IsUnique();

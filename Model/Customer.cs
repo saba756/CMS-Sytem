@@ -6,26 +6,30 @@ namespace CMS.Model
     public class Customer
     {
         [Key]
-        public int customerId { get; set; }
+        public int CustomerId { get; set; }
         [Required]
         //[MaxLength(250)]
-        public string customer_name { get; set; }
+        public string CustomerName { get; set; }
         [Required]
         //[MaxLength(250)]
-        public int customer_phone { get; set; }
+        public int CustomerPhone { get; set; }
         [Required]
         //[MaxLength(250)]
-        public string customer_email { get; set; }
+        public string CustomerEmail { get; set; }
         [Required]
         //[MaxLength(250)]
-        public string payment_detail { get; set; }
-        [ForeignKey("payment_method_code")]
-        public string payment_method_code { get; set; }
-        [Required]
-        //[MaxLength(250)]
-        public string other_payment_detail { get; set; }
+        public string PaymentDetail { get; set; }
+       
+        public string PaymentMethodCode { get; set; }
+        [ForeignKey("PaymentMethod")]
+        public PaymentMethod PaymentMethod { get; set; }
 
-        public DateTime date_became_customer { get; set;}
+        [Required]
+        //[MaxLength(250)]
+        public string OtherPaymentDetail { get; set; }
+
+        public DateTime DateBecameCustomer { get; set;}
+        
 
     }
 }

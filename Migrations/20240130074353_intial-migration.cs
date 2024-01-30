@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CMS.Migrations.AppIdentityDb
+namespace CMS.Migrations
 {
     /// <inheritdoc />
-    public partial class appuser : Migration
+    public partial class intialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -76,7 +76,7 @@ namespace CMS.Migrations.AppIdentityDb
                 name: "Address",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    address_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -88,7 +88,7 @@ namespace CMS.Migrations.AppIdentityDb
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.Id);
+                    table.PrimaryKey("PK_Address", x => x.address_id);
                     table.ForeignKey(
                         name: "FK_Address_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,

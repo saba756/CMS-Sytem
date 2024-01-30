@@ -37,7 +37,7 @@ namespace CMS.Data
 
         public Customer GetCustomerId(int id)
         {
-            return _context.Customer.FirstOrDefault(p => p.customerId == id);
+            return _context.Customer.FirstOrDefault(p => p.CustomerId == id);
         }
 
         public bool SaveChanges()
