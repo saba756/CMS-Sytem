@@ -148,3 +148,5 @@ C:\Users\sata\source\repos\CMS\bin\Debug\net8.0\Microsoft.Extensions.Identity.Co
 C:\Users\sata\source\repos\CMS\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\sata\source\repos\CMS\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\sata\source\repos\CMS\obj\Debug\net8.0\CMS.sourcelink.json
+C:\Users\sata\source\repos\CMS\obj\Debug\net8.0\CMS.Properties.Resources.resources
+C:\Users\sata\source\repos\CMS\obj\Debug\net8.0\CMS.csproj.GenerateResource.cache

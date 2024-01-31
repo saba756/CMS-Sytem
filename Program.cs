@@ -15,7 +15,7 @@ using CMS.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAutoMapper(typeof(CustomerProfile));
 builder.Services.AddDbContext<CustomerContext>(opt => opt.UseSqlServer
               (builder.Configuration.GetConnectionString("CMSConnection")));
@@ -39,6 +39,17 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+                      policy =>
+                      {
+                          policy.WithOrigins("https://localhost:4200",
+                                              "http://localhost:4200")
+                           .AllowAnyHeader()
+                                                  .AllowAnyMethod();
+                      });
+});
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -59,28 +70,13 @@ using (var scope = app.Services.CreateScope())
         var logger = loggerFactory.CreateLogger<Program>();
         logger.LogError(ex, "An error occured during migration");
     }
-    //var scope = app.Services.CreateScope();
-    //var service = scope.ServiceProvider;
-    //var loggerFactory = service.GetRequiredService<ILoggerFactory>();
-    //try
-    //{
-    //    var userManager = service.GetRequiredService<UserManager<AppUser>>();
-    //    var identityContext = service.GetRequiredService<AppIdentityDbContext>();
-    //    await identityContext.Database.MigrateAsync();
-    //    await AppIdentityDbContextSeed.SeedUserAsync(userManager);
-    //}
-    //catch (Exception ex)
-    //{
-    //    var logger = loggerFactory.CreateLogger<Program>();
-    //    logger.LogError(ex, "An error occured during migration");
-    //}
-    // Configure the HTTP request pipeline.
+  
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-
+    app.UseCors();
     app.UseHttpsRedirection();
 
     app.UseAuthentication();

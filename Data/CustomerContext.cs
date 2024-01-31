@@ -8,7 +8,7 @@ namespace CMS.Data
     {
 
         public DbSet<Customer> Customer { get; set; }
-        //public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<AddressTypes> AddressTypes { get; set; }
         public CustomerContext(DbContextOptions<CustomerContext> opt) : base(opt)
         {

@@ -19,9 +19,9 @@ namespace CMS.Model
         [Required]
         //[MaxLength(250)]
         public string PaymentDetail { get; set; }
-       
-        public string PaymentMethodCode { get; set; }
         [ForeignKey("PaymentMethod")]
+        public string PaymentMethodCode { get; set; }
+        
         public PaymentMethod PaymentMethod { get; set; }
 
         [Required]

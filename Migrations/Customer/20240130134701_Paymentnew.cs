@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CMS.Migrations.Customer
 {
     /// <inheritdoc />
-    public partial class Paymentmethodtablev4 : Migration
+    public partial class Paymentnew : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,6 +22,20 @@ namespace CMS.Migrations.Customer
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AddressTypes", x => x.address_type_code);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CustomerAddresses",
+                columns: table => new
+                {
+                    customerId = table.Column<int>(type: "int", nullable: false),
+                    address_id = table.Column<int>(type: "int", nullable: false),
+                    date_from = table.Column<TimeSpan>(type: "time", nullable: false),
+                    address_type_code = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerAddresses", x => new { x.customerId, x.address_id });
                 });
 
             migrationBuilder.CreateTable(
@@ -75,6 +89,9 @@ namespace CMS.Migrations.Customer
 
             migrationBuilder.DropTable(
                 name: "Customer");
+
+            migrationBuilder.DropTable(
+                name: "CustomerAddresses");
 
             migrationBuilder.DropTable(
                 name: "PaymentMethods");

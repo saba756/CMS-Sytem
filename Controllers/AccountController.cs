@@ -14,14 +14,14 @@ namespace CMS.Controllers
 {
     [Route("api/")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class AccountController : ControllerBase
     {
         private IConfiguration _config;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
-        public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
             ITokenService tokenService,
             IMapper mapper)
         {

@@ -10,7 +10,7 @@ namespace CMS.Model
         [MaxLength(250)]
         public string PayMethodDescription { get; set; }
 
-        public ICollection<Customer> Customers { get; set; }
+        public List<Customer> Customers { get; set; }
 
     }
 }

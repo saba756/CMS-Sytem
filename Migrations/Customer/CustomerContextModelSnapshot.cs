@@ -80,6 +80,25 @@ namespace CMS.Migrations.Customer
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("CMS.Model.CustomerAddresses", b =>
+                {
+                    b.Property<int>("customerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("address_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("address_type_code")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("date_from")
+                        .HasColumnType("time");
+
+                    b.HasKey("customerId", "address_id");
+
+                    b.ToTable("CustomerAddresses");
+                });
+
             modelBuilder.Entity("CMS.Model.PaymentMethod", b =>
                 {
                     b.Property<string>("PaymentMethodCode")

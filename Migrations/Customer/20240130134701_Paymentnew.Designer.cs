@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CMS.Migrations.Customer
 {
     [DbContext(typeof(CustomerContext))]
-    [Migration("20240130084627_Paymentmethodtablev4")]
-    partial class Paymentmethodtablev4
+    [Migration("20240130134701_Paymentnew")]
+    partial class Paymentnew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,6 +81,25 @@ namespace CMS.Migrations.Customer
                     b.HasIndex("PaymentMethodCode");
 
                     b.ToTable("Customer");
+                });
+
+            modelBuilder.Entity("CMS.Model.CustomerAddresses", b =>
+                {
+                    b.Property<int>("customerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("address_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("address_type_code")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("date_from")
+                        .HasColumnType("time");
+
+                    b.HasKey("customerId", "address_id");
+
+                    b.ToTable("CustomerAddresses");
                 });
 
             modelBuilder.Entity("CMS.Model.PaymentMethod", b =>
