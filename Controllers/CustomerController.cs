@@ -27,8 +27,8 @@ namespace CMS.Controllers
         [HttpGet]
         public  ActionResult<IEnumerable<CustomerDto>> GetAllCustomers()
         {
-            var CustomerDto =  _repository.GetAllCustomers();
-           return Ok(_mapper.Map<IEnumerable<Customer>>(CustomerDto));
+            var customer =  _repository.GetAllCustomers();
+           return Ok(_mapper.Map<IEnumerable<CustomerDto>>(customer));
         }
         //GET api/commands/{id}
        
@@ -45,14 +45,15 @@ namespace CMS.Controllers
 
 
         //POST api/commands
-   
+
+        [Authorize]
         [HttpPost]
-        public ActionResult<CustomerDto> CreateCustomer(CustomerDto customerDto)
+        public ActionResult<CustomerWriteDto> CreateCustomer(CustomerWriteDto customerDto)
         {
             var customerModel = _mapper.Map<Customer>(customerDto);
             _repository.CreateCustomer(customerModel);
             _repository.SaveChanges();
-            var commandReadDto = _mapper.Map<CustomerDto>(customerModel);
+            var commandReadDto = _mapper.Map<CustomerWriteDto>(customerModel);
 
             return Ok(commandReadDto);
         }
@@ -120,7 +121,7 @@ namespace CMS.Controllers
             _repository.DeleteCustomer(commandModelFromRepo);
             _repository.SaveChanges();
 
-            return NoContent();
+            return Accepted();
         }
 
 

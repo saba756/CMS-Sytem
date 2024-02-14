@@ -22,6 +22,43 @@ namespace CMS.Migrations.Customer
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CMS.Model.Address", b =>
+                {
+                    b.Property<int>("address_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("address_id"));
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("address_id");
+
+                    b.ToTable("Address");
+                });
+
             modelBuilder.Entity("CMS.Model.AddressTypes", b =>
                 {
                     b.Property<int>("address_type_code")
@@ -82,19 +119,30 @@ namespace CMS.Migrations.Customer
 
             modelBuilder.Entity("CMS.Model.CustomerAddresses", b =>
                 {
+                    b.Property<TimeSpan>("date_from")
+                        .HasColumnType("time");
+
                     b.Property<int>("customerId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(0);
 
                     b.Property<int>("address_id")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnOrder(1);
 
                     b.Property<int>("address_type_code")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("date_from")
+                    b.Property<TimeSpan>("date_to")
                         .HasColumnType("time");
 
-                    b.HasKey("customerId", "address_id");
+                    b.HasKey("date_from", "customerId", "address_id");
+
+                    b.HasIndex("address_id");
+
+                    b.HasIndex("address_type_code");
+
+                    b.HasIndex("customerId");
 
                     b.ToTable("CustomerAddresses");
                 });
@@ -123,6 +171,48 @@ namespace CMS.Migrations.Customer
                         .IsRequired();
 
                     b.Navigation("PaymentMethod");
+                });
+
+            modelBuilder.Entity("CMS.Model.CustomerAddresses", b =>
+                {
+                    b.HasOne("CMS.Model.Address", "addresses")
+                        .WithMany("customerAddresses")
+                        .HasForeignKey("address_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CMS.Model.AddressTypes", "AddressTypes")
+                        .WithMany("CustomerAddresses")
+                        .HasForeignKey("address_type_code")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CMS.Model.Customer", "customers")
+                        .WithMany("customerAddresses")
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AddressTypes");
+
+                    b.Navigation("addresses");
+
+                    b.Navigation("customers");
+                });
+
+            modelBuilder.Entity("CMS.Model.Address", b =>
+                {
+                    b.Navigation("customerAddresses");
+                });
+
+            modelBuilder.Entity("CMS.Model.AddressTypes", b =>
+                {
+                    b.Navigation("CustomerAddresses");
+                });
+
+            modelBuilder.Entity("CMS.Model.Customer", b =>
+                {
+                    b.Navigation("customerAddresses");
                 });
 
             modelBuilder.Entity("CMS.Model.PaymentMethod", b =>

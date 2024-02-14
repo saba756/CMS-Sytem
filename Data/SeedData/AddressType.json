@@ -1,0 +1,11 @@
+[
+  {
+    "address_type_description": "Billing"
+  },
+  {
+    "address_type_description": "Delivery"
+  },
+  {
+    "address_type_description": "Residential"
+  }
+]

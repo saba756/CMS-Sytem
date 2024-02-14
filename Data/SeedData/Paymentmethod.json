@@ -1,0 +1,14 @@
+[
+  {
+    "PaymentMethodCode": "CS123",
+    "PayMethodDescription": "credit card"
+  },
+  {
+    "PaymentMethodCode": "PK789",
+    "PayMethodDescription": "debit card"
+  },
+  {
+    "PaymentMethodCode": "COD78",
+    "PayMethodDescription": "COD"
+  }
+]

@@ -150,3 +150,5 @@ C:\Users\sata\source\repos\CMS\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\sata\source\repos\CMS\obj\Debug\net8.0\CMS.sourcelink.json
 C:\Users\sata\source\repos\CMS\obj\Debug\net8.0\CMS.Properties.Resources.resources
 C:\Users\sata\source\repos\CMS\obj\Debug\net8.0\CMS.csproj.GenerateResource.cache
+C:\Users\sata\source\repos\CMS\bin\Debug\net8.0\Data\SeedData\Paymentmethod.json
+C:\Users\sata\source\repos\CMS\bin\Debug\net8.0\Data\SeedData\AddressType.json

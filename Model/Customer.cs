@@ -28,8 +28,8 @@ namespace CMS.Model
         //[MaxLength(250)]
         public string OtherPaymentDetail { get; set; }
 
+        // public string testColumn { get; set; }
         public DateTime DateBecameCustomer { get; set;}
-        
-
+        public List<CustomerAddresses> customerAddresses { get; set; }
     }
 }

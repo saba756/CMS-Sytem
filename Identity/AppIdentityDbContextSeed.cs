@@ -14,7 +14,7 @@ namespace CMS.Identity
                     DisplayName = "Saba",
                     Email = "saba@test.com",
                     UserName = "saba@test.com",
-                    Address = new Address
+                   /* Address = new Address
                     {
                         FirstName = "Bob",
                         LastName = "Bobbity",
@@ -22,7 +22,7 @@ namespace CMS.Identity
                         City = "New York",
                         State = "NY",
                         ZipCode = "90210"
-                    }
+                    }*/
                 };
 
                 await userManager.CreateAsync(user, "Pa$$w0rd");

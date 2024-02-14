@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity;
 using CMS.Model;
 using Microsoft.Extensions.Hosting;
 using CMS.Extensions;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +30,7 @@ builder.Services.AddDbContext<AppIdentityDbContext>(x =>
 
 builder.Services.AddControllers().AddNewtonsoftJson(s => {
     s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+    s.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 });
 builder.Services.AddIdentityServices(builder.Configuration);
 var identityBuilder = builder.Services.AddIdentityCore<AppUser>();
@@ -34,20 +38,46 @@ var identityBuilder = builder.Services.AddIdentityCore<AppUser>();
 identityBuilder = new IdentityBuilder(identityBuilder.UserType, identityBuilder.Services);
 identityBuilder.AddEntityFrameworkStores<AppIdentityDbContext>(); // it allow our user manager to work our identity database
 identityBuilder.AddSignInManager<SignInManager<AppUser>>();
-builder.Services.AddScoped<ICustomerRepo, SqlCustomerRepo>();
+builder.Services.AddScoped<ICustomerRepo, CustomerRepo>();
+builder.Services.AddScoped<IAddress, AddressRepo>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "My API",
+        Version = "v1"
+    });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please insert JWT with Bearer into field",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+   {
+     new OpenApiSecurityScheme
+     {
+       Reference = new OpenApiReference
+       {
+         Type = ReferenceType.SecurityScheme,
+         Id = "Bearer"
+       }
+      },
+      new string[] { }
+    }
+  });
+});
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-                      policy =>
+    options.AddDefaultPolicy(policy =>
                       {
-                          policy.WithOrigins("https://localhost:4200",
-                                              "http://localhost:4200")
+                          policy.WithOrigins("https://localhost:4200","http://localhost:4200")
                            .AllowAnyHeader()
-                                                  .AllowAnyMethod();
+                           .AllowAnyMethod();
                       });
 });
 var app = builder.Build();
@@ -58,6 +88,10 @@ using (var scope = app.Services.CreateScope())
     var loggerFactory = service.GetRequiredService<ILoggerFactory>();
     try
     {
+        var context = service.GetRequiredService<CustomerContext>();
+        // it will update/create database with updated migration
+        await context.Database.MigrateAsync();
+        await CustomerSeed.SeedAsync(context);
 
         // it will update/create database with updated migration
         var userManager = service.GetRequiredService<UserManager<AppUser>>();
@@ -68,7 +102,7 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         var logger = loggerFactory.CreateLogger<Program>();
-        logger.LogError(ex, "An error occured during migration");
+        logger.LogError(ex, "An error occurred during migration");
     }
   
     if (app.Environment.IsDevelopment())

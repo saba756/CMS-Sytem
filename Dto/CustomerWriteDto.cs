@@ -1,15 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using CMS.Model;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CMS.Dto
 {
-    public class CustomerDto
+    public class CustomerWriteDto
     {
-        //public int CustomerId { get; set; }    
-        //    [Required]
-        //[MaxLength(250)]
-        public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         [Required]
         //[MaxLength(250)]
@@ -24,7 +18,5 @@ namespace CMS.Dto
         [Required]
         //[MaxLength(250)]
         public string OtherPaymentDetail { get; set; }
-
-        public List<CustomerAddressDto> customerAddresses { get; set; }
     }
 }

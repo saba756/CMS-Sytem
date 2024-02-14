@@ -10,7 +10,7 @@ namespace CMS.Model
 
     {
         public string DisplayName { get; set; }
-        public Address Address { get; set; }
+       /* public Address Address { get; set; }*/
 
     }
 
